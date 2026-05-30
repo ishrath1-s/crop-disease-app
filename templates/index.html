@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard — Crop & Fruit Disease Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
+    <header>
+        <div class="logo">🌿 CropGuard</div>
+        <div class="tagline">AI-Powered Plant & Fruit Disease Detection</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Detect Diseases<br><span>Instantly</span></h1>
+            <p>Upload a leaf or fruit image and get instant disease diagnosis, severity assessment, and treatment recommendations.</p>
+        </section>
+
+        <!-- Mode Selector -->
+        <section class="mode-selector">
+            <button class="mode-btn active" id="leafBtn" onclick="setMode('leaf')">
+                🍃 Leaf Disease
+            </button>
+            <button class="mode-btn" id="fruitBtn" onclick="setMode('fruit')">
+                🍎 Fruit Disease
+            </button>
+        </section>
+
+        <div class="mode-info" id="modeInfo">
+            🍃 Upload a <strong>leaf image</strong> to detect crop diseases
+        </div>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-card" id="uploadCard">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon" id="uploadIcon">📸</div>
+                    <h3>Drop your image here</h3>
+                    <p>or click to browse</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Choose Image</button>
+                </div>
+                <div class="preview-area" id="previewArea" style="display:none;">
+                    <img id="previewImg" src="" alt="preview">
+                    <button class="change-btn" onclick="resetUpload()">↩ Change Image</button>
+                </div>
+            </div>
+
+            <button class="analyze-btn" id="analyzeBtn" onclick="predict()" disabled>
+                <span id="btnText">🔍 Analyze Image</span>
+                <div class="spinner" id="spinner" style="display:none;"></div>
+            </button>
+        </section>
+
+        <!-- Results -->
+        <section class="results-section" id="resultsSection" style="display:none;">
+            <h2>🔬 Analysis Results</h2>
+            <div class="top-result" id="topResult"></div>
+            <div class="details-grid" id="detailsGrid"></div>
+            <div class="other-predictions" id="otherPredictions"></div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="stat"><span class="stat-num">38</span><span class="stat-label">Leaf Classes</span></div>
+            <div class="stat"><span class="stat-num">24</span><span class="stat-label">Fruit Classes</span></div>
+            <div class="stat"><span class="stat-num">95.8%</span><span class="stat-label">Leaf Accuracy</span></div>
+            <div class="stat"><span class="stat-num">92.3%</span><span class="stat-label">Fruit Accuracy</span></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built with MobileNetV2 + PlantVillage & Fruit Disease Dataset &nbsp;|&nbsp; CropGuard 2025</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
